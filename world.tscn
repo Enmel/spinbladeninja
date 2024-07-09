@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://b26i1ecxyfx3k"]
+
+[ext_resource type="Script" path="res://blade.gd" id="1_m27rj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxv50"]
+albedo_color = Color(1, 0.337255, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ijf2t"]
+material = SubResource("StandardMaterial3D_kxv50")
+top_radius = 0.0
+bottom_radius = 1.14
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sb3q8"]
+points = PackedVector3Array(1.02543, -0.961982, 0.444397, -0.206892, -0.970007, -1.10314, -0.344255, -0.968827, -1.06728, 0.0328445, 0.9185, -0.0328445, -0.882416, -0.955113, 0.678716, 0.882416, -0.955113, -0.678716, 0.206688, -0.97006, 1.1032, -1.06727, -0.968821, -0.344253, 0.344253, -0.968821, -1.06727, -0.344253, -0.968821, 1.06727, -0.0328445, 0.9185, 0.0328445, 1.1032, -0.97006, -0.206688, 0.678716, -0.955113, 0.882416, -1.1032, -0.97006, 0.206688, -0.773355, -0.842757, -0.708943, 0.0328445, 0.9185, 0.0328445, -0.0328445, 0.9185, -0.0328445, 0.678705, -0.955097, -0.882401, -0.678705, -0.955097, 0.882401, 1.1032, -0.970059, 0.206687, -0.578362, -0.957577, -0.952709, 0.882401, -0.955097, 0.678705, 0.0657137, -0.793893, -1.01928, -1.01928, -0.793893, -0.0657137, -0.0657137, -0.793893, 1.01928, 1.02542, -0.961975, -0.444393, -1.02542, -0.961975, 0.444393, 0.444393, -0.961975, 1.02542, -0.952709, -0.957577, -0.578362, 1.01912, -0.793586, -0.0654972, -0.514007, -0.964792, 0.994291, 0.454164, -0.783361, -0.908327)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_adb4f"]
+size = Vector2(40, 40)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2y28"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8xi3c"]
+albedo_color = Color(1, 0.380392, 0.152941, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.99267, -4.76837e-07)
+floor_stop_on_slope = false
+floor_max_angle = 1.0472
+floor_snap_length = 0.0
+script = ExtResource("1_m27rj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ijf2t")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_sb3q8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.00999977, 0.831712, -0.555117, 0.0149799, 0.555207, 0.831577, 0.999838, 0, -0.0180109, -14.3321, 17.3685, -5.26243)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 23.6807, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("PlaneMesh_adb4f")
+material = SubResource("StandardMaterial3D_q2y28")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18.5991)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.962289, -0.272028, 0, 0.272028, 0.962289, 0, 0, 0, 1, 0, 2.04558, 0)
+use_collision = true
+radius = 12.8435
+height = 7.456
+sides = 17
+cone = true
+material = SubResource("StandardMaterial3D_8xi3c")
