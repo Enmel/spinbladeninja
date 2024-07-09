@@ -101,3 +101,17 @@ transform = Transform3D(-0.00999977, 0.831712, -0.555117, 0.0149799, 0.555207, 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Escenario"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 23.6807, 0)
+
+[node name="ConoConFisicas2" type="RigidBody3D" parent="."]
+transform = Transform3D(0.991204, 0, 0.132343, 0, 1, 0, -0.132343, 0, 0.991204, 0, 5.56783, -12.6306)
+mass = 5.0
+constant_torque = Vector3(0, 80, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ConoConFisicas2"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ijf2t")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ConoConFisicas2"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_lbrh3")
