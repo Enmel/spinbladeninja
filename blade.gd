@@ -33,5 +33,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
-	print(is_on_floor())
-	move_and_slide()
+	var collided := move_and_slide()
+	if collided and not get_floor_normal():
+		var slide_direction := get_last_slide_collision().get_normal()
+		velocity = velocity.slide(slide_direction)
